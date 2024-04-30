@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Carrito</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .carrito {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .carrito th, .carrito td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .carrito th {
+            background-color: #f2f2f2;
+        }
+        .carrito tr:hover {
+            background-color: #f2f2f2;
+        }
+        .acciones {
+            margin-top: 20px;
+        }
+        .acciones input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .acciones input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gestionar Carrito</h1>
+
+    <!-- Lista de Productos en el Carrito -->
+    <table class="carrito">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Simulación de productos en el carrito (se debería obtener de la base de datos)
+            $productos = [
+                ['nombre' => 'Producto 1', 'precio' => 10.00, 'cantidad' => 1],
+                ['nombre' => 'Producto 2', 'precio' => 15.00, 'cantidad' => 2]
+            ];
+
+            // Variable para almacenar el total del carrito
+            $total_carrito = 0;
+
+            foreach ($productos as $producto) {
+                $subtotal = $producto['precio'] * $producto['cantidad'];
+                $total_carrito += $subtotal;
+            ?>
+            <tr>
+                <td><?php echo $producto['nombre']; ?></td>
+                <td>$<?php echo number_format($producto['precio'], 2); ?></td>
+                <td>
+                    <form action="actualizar_carrito.php" method="POST">
+                        <input type="hidden" name="producto" value="<?php echo $producto['nombre']; ?>">
+                        <input type="number" name="cantidad" value="<?php echo $producto['cantidad']; ?>" min="1">
+                        <input type="submit" value="Actualizar">
+                    </form>
+                </td>
+                <td>$<?php echo number_format($subtotal, 2); ?></td>
+                <td>
+                    <form action="eliminar_producto.php" method="POST">
+                        <input type="hidden" name="producto" value="<?php echo $producto['nombre']; ?>">
+                        <input type="submit" value="Eliminar">
+                    </form>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
+
+    <?php if (count($productos) == 0): ?>
+    <p>No hay productos en tu carrito.</p>
+    <?php endif; ?>
+
+    <!-- Acciones del Carrito -->
+    <div class="acciones">
+        <form action="finalizar_compra.php" method="POST">
+            <input type="submit" value="Finalizar Compra">
+        </form>
+        <form action="eliminar_carrito.php" method="POST">
+            <input type="submit" value="Eliminar Carrito">
+        </form>
+    </div>
+
+    <p>Total del Carrito: $<?php echo number_format($total_carrito, 2); ?></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Cuenta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gestionar Cuenta</h1>
+
+    <!-- Ver Información Personal -->
+    <h2>Ver Información Personal</h2>
+    <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="Nombre Usuario" disabled>
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" value="usuario@example.com" disabled>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" value="123456789" disabled>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" value="Calle 123" disabled>
+        <label for="municipio">Municipio:</label>
+        <input type="text" id="municipio" name="municipio" value="Ciudad" disabled>
+        <label for="foto">Foto:</label>
+        <input type="file" id="foto" name="foto" disabled>
+    </form>
+
+    <!-- Actualizar Información Personal -->
+    <h2>Actualizar Información Personal</h2>
+    <form action="actualizar_informacion.php" method="POST">
+        <label for="nombre_actualizado">Nuevo Nombre:</label>
+        <input type="text" id="nombre_actualizado" name="nombre_actualizado">
+        <label for="correo_actualizado">Nuevo Correo Electrónico:</label>
+        <input type="email" id="correo_actualizado" name="correo_actualizado">
+        <label for="telefono_actualizado">Nuevo Teléfono:</label>
+        <input type="tel" id="telefono_actualizado" name="telefono_actualizado">
+        <label for="direccion_actualizado">Nueva Dirección:</label>
+        <input type="text" id="direccion_actualizado" name="d
