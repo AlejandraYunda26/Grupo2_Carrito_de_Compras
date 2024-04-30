@@ -11,5 +11,9 @@ if (!empty($nombre) && !empty($correo) && !empty($telefono) && !empty($direccion
     // Actualizar la información en la base de datos
     // Aquí deberías implementar la lógica para actualizar la información del usuario en tu base de datos
 
-    // Redirigir de nuevo a la página de gestión de
+    // Redirigir de nuevo a la página de gestión de cuenta con un mensaje de éxito
+    header("Location: gestionar_cuenta.html?mensaje=Información actualizada correctamente");
+} else {
+    // Si faltan datos, redirigir de nuevo a la página de gestión de cuenta con un mensaje de error
+    header("Location: gestionar_cuenta.html?mensaje=Por favor, completa todos los campos");
 }
