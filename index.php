@@ -12,6 +12,8 @@
 <p>¡Bienvenido a nuestro sitio web!</p>
 
 <a href="registros.html">Registrarse</a>
+<a href="gestionar_cuenta.html">gestionar_cuenta</a>
+<a href="carrito.html">carrito</a>
 
 </body>
 </html>

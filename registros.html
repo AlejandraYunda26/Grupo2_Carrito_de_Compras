@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,6 +55,8 @@
 
 <div class="container">
     <h1>Registrar Usuario</h1>
+    <!-- Agrega un evento de clic al ícono de flecha hacia atrás -->
+    <i class="fas fa-arrow-left back-icon" onclick="goToMainPage()"></i>
     <form action="registrar_usuario.php" method="POST" enctype="multipart/form-data">
         <label for="nombres">Nombres:</label>
         <input type="text" id="nombres" name="nombres" maxlength="30" required>
@@ -95,6 +98,13 @@
         <input type="submit" value="Registrar Usuario">
     </form>
 </div>
+
+<script>
+    // Función para ir a la página principal
+    function goToMainPage() {
+        window.location.href = "index.php";
+    }
+</script>
 
 </body>
 </html>

@@ -83,7 +83,8 @@
 
 <div class="container">
     <div class="header">
-        <i class="fas fa-arrow-left back-icon"></i>
+        <!-- Agrega un evento de clic al ícono de flecha hacia atrás -->
+        <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
         <img src="logo.png" alt="Logo de la Tienda" class="logo">
     </div>
 
@@ -125,6 +126,11 @@
 </div>
 
 <script>
+    // Función para ir a la página anterior
+    function goBack() {
+        window.location.href = "index.php";
+    }
+
     const updateForm = document.getElementById('updateForm');
     const nombreInput = document.getElementById('nombre_actualizado');
     const correoInput = document.getElementById('correo_actualizado');
