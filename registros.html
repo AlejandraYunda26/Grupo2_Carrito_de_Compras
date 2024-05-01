@@ -10,7 +10,33 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #7c6f6f;
+            background-color: #fafafa;
+            position: relative; /* Agrega posición relativa para el cuerpo */
+        }
+        .header {
+            background-color: #dfdcdc;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+        }
+        .options {
+            display: flex;
+            align-items: center;
+        }
+        .option {
+            color: #181818;
+            margin-right: 20px;
+            cursor: pointer;
         }
         .container {
             max-width: 600px;
@@ -19,6 +45,8 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative; /* Agrega posición relativa */
+            z-index: 1; /* Asegura que el formulario aparezca sobre los iconos */
         }
         h1 {
             text-align: center;
@@ -33,14 +61,16 @@
             margin-bottom: 10px;
         }
         input[type="submit"] {
-            background-color: #ff5e00;
+            background-color: #0056b3;
             color: #fff;
             border: none;
             padding: 10px 15px;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #004080;
         }
         input[type="checkbox"] {
             background-color: #00ff22;
@@ -49,9 +79,32 @@
         .error {
             color: red;
         }
+        .icons-container i {
+            color: #181818;
+            font-size: 24px; /* Ajusta el tamaño de los iconos */
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
+
+<div class="header">
+    <div class="options">
+        <div class="option">Hombre</div>
+        <div class="option">Mujer</div>
+        <div class="option">Cosas</div>
+    </div>
+    <div class="logo-container">
+        <img class="logo" src="Logo.png" alt="Logo">
+        
+    </div>
+    <div class="icons-container">
+        <i class="fas fa-user"></i>
+        <i class="fas fa-search"></i>
+        <i class="fas fa-shopping-cart"></i>
+    </div>
+    
+</div>
 
 <div class="container">
     <h1>Registrar Usuario</h1>
@@ -61,43 +114,13 @@
         <label for="nombres">Nombres:</label>
         <input type="text" id="nombres" name="nombres" maxlength="30" required>
 
-        <label for="apellidos">Apellidos:</label>
-        <input type="text" id="apellidos" name="apellidos" maxlength="30" required>
-
-        <label for="id_usuario">ID de Usuario:</label>
-        <input type="text" id="id_usuario" name="id_usuario" maxlength="20" pattern="[0-9]+" required>
-
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" maxlength="100" required>
-
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" maxlength="16" pattern="[0-9]+" required>
-
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" maxlength="80" required>
-
-        <label for="municipio">Municipio:</label>
-        <select id="municipio" name="municipio" required>
-            <option value="municipio1">Municipio 1</option>
-            <option value="municipio2">Municipio 2</option>
-            <option value="municipio3">Municipio 3</option>
-        </select>
-
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" maxlength="80" required>
-
-        <label for="confirmar_password">Confirmar Contraseña:</label>
-        <input type="password" id="confirmar_password" name="confirmar_password" maxlength="80" required>
-
-        <input type="checkbox" id="terminos" name="terminos" required>
-        <label for="terminos">Acepto los términos y condiciones de tratamiento de datos</label>
-
-        <label for="foto_perfil">Foto de Perfil (opcional):</label>
-        <input type="file" id="foto_perfil" name="foto_perfil" accept="image/png">
+        <!-- Agregar el resto de tus campos de formulario aquí -->
 
         <input type="submit" value="Registrar Usuario">
     </form>
 </div>
+
+<!-- Contenedor de iconos en la esquina superior derecha -->
 
 <script>
     // Función para ir a la página principal
