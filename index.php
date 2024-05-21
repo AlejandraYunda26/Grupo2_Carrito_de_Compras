@@ -118,7 +118,7 @@
     <div class="bottom-links">
         <a type="submit" href="registros.html">Registrarse</a>
         <a type="submit" href="seleccionar_usu.html">Gestionar Cuenta</a>
-        <a type="submit" href="gestionar_usu.html">Carrito</a>
+        <a type="submit" href="carrito.html">Carrito</a>
     </div>
 </div>
 

@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Carrito</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Agrega el CDN de Font Awesome para los iconos -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,15 +68,56 @@
             display: block;
             text-align: center;
             margin-top: 20px;
-            color: #007bff;
+            color: #e5e7e9;
             text-decoration: none;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #d3d5d7;
+            color: #fff;
+        }
+        .logo {
+            margin: 0 auto; /* Para centrar el logo */
+        }
+        .search {
+            display: flex;
+            align-items: center;
+        }
+        .search input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .user-icon {
+            margin-right: 10px;
+        }
+        /* Cambiar color de los iconos y el texto a negro */
+        .user-icon, .fa-shopping-cart, .user-name {
+            color: #000;
         }
     </style>
 </head>
 <body>
 
+<div class="header">
+    <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
+    <img src="logo.png" alt="Logo de la Tienda" class="logo">
+    <div class="search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Buscar...">
+    </div>
+    <div>
+        <span class="user-icon"><i class="fas fa-user"></i></span>
+        <span class="user-name">Alejandra Yunda</span>
+        <span class="user-icon"><i class="fas fa-shopping-cart"></i></span>
+    </div>
+</div>
+
 <div class="container">
-    <h1>Gestionar Carrito</h1>
+    <h1>1 Carrito de Compras</h1>
 
     <!-- Lista de Productos en el Carrito -->
     <table class="carrito">
@@ -134,6 +175,12 @@
     <!-- Enlace para volver a la página principal -->
     <a href="index.php" class="back-to-home">Ir a la página principal</a>
 </div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 
 </body>
 </html>

@@ -180,50 +180,38 @@
     const correoInput = document.getElementById('correo_actualizado');
     const telefonoInput = document.getElementById('telefono_actualizado');
     const direccionInput = document.getElementById('direccion_actualizado');
-    const nombreError = document.getElementById('nombreError');
-    const correoError = document.getElementById('correoError');
-    const telefonoError = document.getElementById('telefonoError');
-    const direccionError = document.getElementById('direccionError');
     const updateMessage = document.getElementById('updateMessage');
 
     updateForm.addEventListener('submit', function(event) {
         event.preventDefault();
         let isValid = true;
 
-        // Validation for name
+        // Validación para el nombre
         if (nombreInput.value.trim() === '') {
-            nombreError.textContent = 'Por favor ingresa tu nombre';
+            updateMessage.textContent = 'Por favor ingresa tu nombre';
             isValid = false;
-        } else {
-            nombreError.textContent = '';
         }
 
-        // Validation for email
-        if (correoInput.value.trim() === '') {
-            correoError.textContent = 'Por favor ingresa tu correo electrónico';
+        // Validación para el correo electrónico
+        else if (correoInput.value.trim() === '') {
+            updateMessage.textContent = 'Por favor ingresa tu correo electrónico';
             isValid = false;
-        } else {
-            correoError.textContent = '';
         }
 
-        // Validation for phone number
-        if (telefonoInput.value.trim() === '') {
-            telefonoError.textContent = 'Por favor ingresa tu número de teléfono';
+        // Validación para el número de teléfono
+        else if (telefonoInput.value.trim() === '') {
+            updateMessage.textContent = 'Por favor ingresa tu número de teléfono';
             isValid = false;
-        } else {
-            telefonoError.textContent = '';
         }
 
-        // Validation for address
-        if (direccionInput.value.trim() === '') {
-            direccionError.textContent = 'Por favor ingresa tu dirección';
+        // Validación para la dirección
+        else if (direccionInput.value.trim() === '') {
+            updateMessage.textContent = 'Por favor ingresa tu dirección';
             isValid = false;
-        } else {
-            direccionError.textContent = '';
         }
 
         if (isValid) {
-            // Simulating form submission and displaying success message
+            // Simulación de envío del formulario y mostrar mensaje de éxito
             updateMessage.textContent = '¡Información actualizada correctamente!';
             updateMessage.classList.remove('error');
             updateMessage.classList.add('success');
@@ -233,8 +221,7 @@
                 updateMessage.classList.remove('success');
             }, 3000);
         } else {
-            // If form is not valid, display error message
-            updateMessage.textContent = 'Por favor completa todos los campos correctamente';
+            // Si el formulario no es válido, mostrar mensaje de error
             updateMessage.classList.remove('success');
             updateMessage.classList.add('error');
         }
@@ -243,3 +230,4 @@
 
 </body>
 </html>
+
