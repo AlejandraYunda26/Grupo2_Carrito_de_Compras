@@ -1,0 +1,5 @@
+Grupo 2 
+Requerimientos: 
+Gestionar Usuario
+Gestionar Carrito
+Registrar Usuario
