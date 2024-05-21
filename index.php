@@ -44,9 +44,9 @@
             background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 10px 15px;
+            padding: 20px 35px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: background-color 0.3s ease;
         }
         .icons-container i {
@@ -55,8 +55,9 @@
             margin-left: 10px;
         }
         .main-content {
+            color: #fff;
             text-align: center;
-            margin: 20px;
+            margin: 100px;
             z-index: 2; /* Asegura que el contenido principal esté sobre la imagen de fondo */
         }
         .main-content a {
@@ -74,6 +75,7 @@
             background-size: cover;
             position: relative;
             display: flex;
+            margin: 20px;
             align-items: center;
             justify-content: center;
         }
@@ -106,12 +108,13 @@
     </div>
 </div>
 
-<div class="main-content">
-    <h2>Bienvenido</h2>
-    <p>¡Bienvenido a nuestro sitio web!</p>
-</div>
-
 <div class="bottom-image-container">
+    <div class="main-content">
+        <h1>Bienvenido</h1>
+        <h2>¡Bienvenido a nuestro sitio web!</h2>
+    </div>
+
+
     <div class="bottom-links">
         <a type="submit" href="registros.html">Registrarse</a>
         <a type="submit" href="seleccionar_usu.html">Gestionar Cuenta</a>
