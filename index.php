@@ -40,6 +40,15 @@
             margin-right: 20px;
             cursor: pointer;
         }
+        a[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
         .icons-container i {
             color: #181818;
             font-size: 24px; /* Ajusta el tamaño de los iconos */
@@ -104,9 +113,9 @@
 
 <div class="bottom-image-container">
     <div class="bottom-links">
-        <a href="registros.html">Registrarse</a>
-        <a href="gestionar_cuenta.html">Gestionar Cuenta</a>
-        <a href="carrito.html">Carrito</a>
+        <a type="submit" href="registros.html">Registrarse</a>
+        <a type="submit" href="seleccionar_usu.html">Gestionar Cuenta</a>
+        <a type="submit" href="gestionar_usu.html">Carrito</a>
     </div>
 </div>
 

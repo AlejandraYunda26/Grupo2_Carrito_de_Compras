@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Ropa - Mi Cuenta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fffffe;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .back-icon {
+            font-size: 24px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #333;
+        }
+        .success {
+            color: #333;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <!-- Agrega un evento de clic al ícono de flecha hacia atrás -->
+        <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
+        <img src="logo.png" alt="Logo de la Tienda" class="logo">
+    </div>
+
+    <h1>Mi Cuenta - Tienda de Ropa</h1>
+
+    <!-- Selección de Usuario -->
+    <h2>Seleccionar Usuario</h2>
+    <form id="userForm" action="ver_informacion_usuario.php" method="GET">
+        <label for="usuario">Usuarios Registrados:</label>
+        <select id="usuario" name="usuario">
+            <option value="usuario1">Usuario 1</option>
+            <option value="usuario2">Usuario 2</option>
+            <option value="usuario3">Usuario 3</option>
+            <!-- Puedes agregar más opciones de usuarios aquí -->
+        </select>
+    </form>    
+
+<script>
+    // Función para ir a la página anterior
+    function goBack() {
+        window.location.href = "index.php";
+    }
+
+</script>
+
+<div class="bottom-image-container">
+    <div class="bottom-links">
+        <a type="submit" href="carrito.html">Seleccionar</a>
+    </div>
+</div>
+</body>
+</html>
