@@ -1,0 +1,29 @@
+/* Estilos para la clase col-lg-6 */
+.col-lg-6 {
+    width: 50%; /* Ancho del 50% para ocupar la mitad del contenedor padre */
+    float: left; /* Flotar a la izquierda para que estén en línea */
+}
+
+/* Estilos para la clase col-md-6 */
+.col-md-6 {
+    width: 50%; /* Ancho del 50% para ocupar la mitad del contenedor padre */
+    float: left; /* Flotar a la izquierda para que estén en línea */
+}
+
+/* Estilos para la clase col-sm-12 */
+.col-sm-12 {
+    width: 100%; /* Ancho del 100% para ocupar todo el ancho en pantallas pequeñas */
+    clear: both; /* Limpiar el flotador para evitar problemas de diseño */
+}
+
+/* Estilos para la clase col-xs-12 */
+.col-xs-12 {
+    width: 100%; /* Ancho del 100% para ocupar todo el ancho en dispositivos extra pequeños */
+    clear: both; /* Limpiar el flotador para evitar problemas de diseño */
+}
+
+/* Estilos para el input checkbox */
+input[type="checkbox"] {
+    vertical-align: middle; /* Alinear verticalmente con el texto */
+    margin-right: 2px; /* Margen derecho para separarlo del texto */
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Ropa - Mi Cuenta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fffffe;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .back-icon {
+            font-size: 24px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #333;
+        }
+        .success {
+            color: #333;
+        }
+        .error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <!-- Agrega un evento de clic al ícono de flecha hacia atrás -->
+        <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
+        <img src="logo.png" alt="Logo de la Tienda" class="logo">
+    </div>
+
+    <h1>Mi Cuenta - Tienda de Ropa</h1>
+
+    <!-- Ver Información Personal -->
+    <h2>Información Personal</h2>
+    <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" disabled>
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" disabled>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" disabled>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" disabled>
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" disabled>
+    </form>
+
+    <!-- Actualizar Información Personal -->
+    <h2>Actualizar Información Personal</h2>
+    <form id="updateForm" action="actualizar_informacion.php" method="POST">
+        <!-- Campos del formulario para la información actualizada -->
+        <label for="nombre_actualizado">Nuevo Nombre:</label>
+        <input type="text" id="nombre_actualizado" name="nombre_actualizado">
+        <label for="correo_actualizado">Nuevo Correo Electrónico:</label>
+        <input type="email" id="correo_actualizado" name="correo_actualizado">
+        <label for="telefono_actualizado">Nuevo Teléfono:</label>
+        <input type="tel" id="telefono_actualizado" name="telefono_actualizado">
+        <label for="direccion_actualizado">Nueva Dirección:</label>
+        <input type="text" id="direccion_actualizado" name="direccion_actualizado">
+        <!-- Botón para enviar el formulario -->
+        <input type="submit" value="Actualizar Información">
+        <div id="updateMessage"></div>
+    </form>
+    
+</div>
+
+<script>
+    // Función para ir a la página anterior
+    function goBack() {
+        window.location.href = "index.php";
+    }
+
+    // Función para obtener el parámetro de la URL
+    function getParameterByName(name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        var results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Función para cargar la información del usuario seleccionado
+    function cargarInformacionUsuario() {
+        var idUsuario = getParameterByName('id_usuario');
+        if (idUsuario) {
+            // Realizar una solicitud AJAX para obtener la información del usuario desde el servidor
+            var xhrUsuarioInfo = new XMLHttpRequest();
+            xhrUsuarioInfo.open("GET", "get_usuario_info.php?id_usuario=" + idUsuario, true);
+            xhrUsuarioInfo.onreadystatechange = function() {
+                if (xhrUsuarioInfo.readyState === 4 && xhrUsuarioInfo.status === 200) {
+                    // Parsear la respuesta JSON
+                    var usuario = JSON.parse(xhrUsuarioInfo.responseText);
+
+                    // Actualizar los campos del formulario con la información del usuario
+                    document.getElementById("nombre").value = usuario.nombres;
+                    document.getElementById("correo").value = usuario.correo;
+                    document.getElementById("telefono").value = usuario.telefono;
+                    document.getElementById("direccion").value = usuario.direccion;
+                    document.getElementById("ciudad").value = usuario.ciudad;
+                }
+            };
+            xhrUsuarioInfo.send();
+        } else {
+            // Limpiar los campos del formulario si no se selecciona un usuario
+            document.getElementById("nombre").value = "";
+            document.getElementById("correo").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("direccion").value = "";
+            document.getElementById("ciudad").value = "";
+        }
+    }
+
+    // Llamar a la función para cargar la información del usuario al cargar la página
+    window.onload = cargarInformacionUsuario;
+
+    const updateForm = document.getElementById('updateForm');
+    const nombreInput = document.getElementById('nombre_actualizado');
+    const correoInput = document.getElementById('correo_actualizado');
+    const telefonoInput = document.getElementById('telefono_actualizado');
+    const direccionInput = document.getElementById('direccion_actualizado');
+    const nombreError = document.getElementById('nombreError');
+    const correoError = document.getElementById('correoError');
+    const telefonoError = document.getElementById('telefonoError');
+    const direccionError = document.getElementById('direccionError');
+    const updateMessage = document.getElementById('updateMessage');
+
+    updateForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let isValid = true;
+
+        // Validation for name
+        if (nombreInput.value.trim() === '') {
+            nombreError.textContent = 'Por favor ingresa tu nombre';
+            isValid = false;
+        } else {
+            nombreError.textContent = '';
+        }
+
+        // Validation for email
+        if (correoInput.value.trim() === '') {
+            correoError.textContent = 'Por favor ingresa tu correo electrónico';
+            isValid = false;
+        } else {
+            correoError.textContent = '';
+        }
+
+        // Validation for phone number
+        if (telefonoInput.value.trim() === '') {
+            telefonoError.textContent = 'Por favor ingresa tu número de teléfono';
+            isValid = false;
+        } else {
+            telefonoError.textContent = '';
+        }
+
+        // Validation for address
+        if (direccionInput.value.trim() === '') {
+            direccionError.textContent = 'Por favor ingresa tu dirección';
+            isValid = false;
+        } else {
+            direccionError.textContent = '';
+        }
+
+        if (isValid) {
+            // Simulating form submission and displaying success message
+            updateMessage.textContent = '¡Información actualizada correctamente!';
+            updateMessage.classList.remove('error');
+            updateMessage.classList.add('success');
+            setTimeout(function() {
+                updateForm.reset();
+                updateMessage.textContent = '';
+                updateMessage.classList.remove('success');
+            }, 3000);
+        } else {
+            // If form is not valid, display error message
+            updateMessage.textContent = 'Por favor completa todos los campos correctamente';
+            updateMessage.classList.remove('success');
+            updateMessage.classList.add('error');
+        }
+    });
+</script>
+
+</body>
+</html>
