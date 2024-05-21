@@ -94,35 +94,34 @@
     <h2>Información Personal</h2>
     <form>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="Nombre Cliente" disabled>
+        <input type="text" id="nombre" name="nombre" disabled>
         <label for="correo">Correo Electrónico:</label>
-        <input type="email" id="correo" name="correo" value="cliente@example.com" disabled>
+        <input type="email" id="correo" name="correo" disabled>
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" value="123456789" disabled>
+        <input type="tel" id="telefono" name="telefono" disabled>
         <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" value="Calle 123" disabled>
+        <input type="text" id="direccion" name="direccion" disabled>
         <label for="ciudad">Ciudad:</label>
-        <input type="text" id="ciudad" name="ciudad" value="Ciudad" disabled>
+        <input type="text" id="ciudad" name="ciudad" disabled>
     </form>
 
     <!-- Actualizar Información Personal -->
     <h2>Actualizar Información Personal</h2>
     <form id="updateForm" action="actualizar_informacion.php" method="POST">
+        <!-- Campos del formulario para la información actualizada -->
         <label for="nombre_actualizado">Nuevo Nombre:</label>
         <input type="text" id="nombre_actualizado" name="nombre_actualizado">
-        <div id="nombreError" class="error"></div>
         <label for="correo_actualizado">Nuevo Correo Electrónico:</label>
         <input type="email" id="correo_actualizado" name="correo_actualizado">
-        <div id="correoError" class="error"></div>
         <label for="telefono_actualizado">Nuevo Teléfono:</label>
         <input type="tel" id="telefono_actualizado" name="telefono_actualizado">
-        <div id="telefonoError" class="error"></div>
         <label for="direccion_actualizado">Nueva Dirección:</label>
         <input type="text" id="direccion_actualizado" name="direccion_actualizado">
-        <div id="direccionError" class="error"></div>
+        <!-- Botón para enviar el formulario -->
         <input type="submit" value="Actualizar Información">
         <div id="updateMessage"></div>
     </form>
+    
 </div>
 
 <script>
@@ -130,6 +129,51 @@
     function goBack() {
         window.location.href = "index.php";
     }
+
+    // Función para obtener el parámetro de la URL
+    function getParameterByName(name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        var results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Función para cargar la información del usuario seleccionado
+    function cargarInformacionUsuario() {
+        var idUsuario = getParameterByName('id_usuario');
+        if (idUsuario) {
+            // Realizar una solicitud AJAX para obtener la información del usuario desde el servidor
+            var xhrUsuarioInfo = new XMLHttpRequest();
+            xhrUsuarioInfo.open("GET", "get_usuario_info.php?id_usuario=" + idUsuario, true);
+            xhrUsuarioInfo.onreadystatechange = function() {
+                if (xhrUsuarioInfo.readyState === 4 && xhrUsuarioInfo.status === 200) {
+                    // Parsear la respuesta JSON
+                    var usuario = JSON.parse(xhrUsuarioInfo.responseText);
+
+                    // Actualizar los campos del formulario con la información del usuario
+                    document.getElementById("nombre").value = usuario.nombres;
+                    document.getElementById("correo").value = usuario.correo;
+                    document.getElementById("telefono").value = usuario.telefono;
+                    document.getElementById("direccion").value = usuario.direccion;
+                    document.getElementById("ciudad").value = usuario.ciudad;
+                }
+            };
+            xhrUsuarioInfo.send();
+        } else {
+            // Limpiar los campos del formulario si no se selecciona un usuario
+            document.getElementById("nombre").value = "";
+            document.getElementById("correo").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("direccion").value = "";
+            document.getElementById("ciudad").value = "";
+        }
+    }
+
+    // Llamar a la función para cargar la información del usuario al cargar la página
+    window.onload = cargarInformacionUsuario;
 
     const updateForm = document.getElementById('updateForm');
     const nombreInput = document.getElementById('nombre_actualizado');

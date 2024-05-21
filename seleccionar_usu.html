@@ -91,26 +91,30 @@
 </head>
 <body>
 
-<div class="container">
     <div class="header">
         <!-- Agrega un evento de clic al ícono de flecha hacia atrás -->
         <i class="fas fa-arrow-left back-icon" onclick="goBack()"></i>
         <img src="logo.png" alt="Logo de la Tienda" class="logo">
+        <div id="userHeader" style="display:none;">Usuario: <span id="selectedUserName"></span></div>
     </div>
-
+    
     <h1>Mi Cuenta - Tienda de Ropa</h1>
 
     <!-- Selección de Usuario -->
     <h2>Seleccionar Usuario</h2>
-    <form id="userForm" action="ver_informacion_usuario.php" method="GET">
+    <form id="userForm">
         <label for="usuario">Usuarios Registrados:</label>
         <select id="usuario" name="usuario">
-            <option value="usuario1">Usuario 1</option>
-            <option value="usuario2">Usuario 2</option>
-            <option value="usuario3">Usuario 3</option>
-            <!-- Puedes agregar más opciones de usuarios aquí -->
+            <option value="">Selecciona un usuario</option>
         </select>
     </form>    
+
+    <div class="bottom-image-container">
+        <div class="bottom-links">
+            <a type="submit" id="seleccionarBtn">Seleccionar</a>
+        </div>
+    </div>
+</div>
 
 <script>
     // Función para ir a la página anterior
@@ -118,12 +122,46 @@
         window.location.href = "index.php";
     }
 
+    // Función para cargar los usuarios desde el servidor
+    function cargarUsuarios() {
+        var usuarioSelect = document.getElementById("usuario");
+
+        // Realizar una solicitud AJAX para obtener la lista de usuarios desde el servidor
+        var xhrUsuarios = new XMLHttpRequest();
+        xhrUsuarios.open("GET", "get_usuarios.php", true);
+        xhrUsuarios.onreadystatechange = function() {
+            if (xhrUsuarios.readyState === 4 && xhrUsuarios.status === 200) {
+                // Parsear la respuesta JSON
+                var usuarios = JSON.parse(xhrUsuarios.responseText);
+
+                // Agregar opciones de usuarios al elemento select
+                usuarios.forEach(function(usuario) {
+                    var option = document.createElement("option");
+                    option.value = usuario.id;
+                    option.text = usuario.nombre_completo;
+                    usuarioSelect.appendChild(option);
+                });
+            }
+        };
+        xhrUsuarios.send();
+    }
+
+    // Llamar a la función para cargar los usuarios al cargar la página
+    window.onload = cargarUsuarios;
+
+    // Evento de clic para el botón "Seleccionar"
+    document.getElementById("seleccionarBtn").addEventListener("click", function() {
+        var usuarioSelect = document.getElementById("usuario");
+        var usuarioId = usuarioSelect.value;
+
+        if (usuarioId) {
+            // Redirigir a gestionar_cuenta.html con el ID del usuario seleccionado
+            window.location.href = "gestionar_cuenta.html?id_usuario=" + usuarioId;
+        } else {
+            alert("Por favor selecciona un usuario");
+        }
+    });
 </script>
 
-<div class="bottom-image-container">
-    <div class="bottom-links">
-        <a type="submit" href="gestionar_cuenta.html">Seleccionar</a>
-    </div>
-</div>
 </body>
 </html>

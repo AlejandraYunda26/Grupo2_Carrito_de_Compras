@@ -1,5 +1,5 @@
 <?php
-// Conexión a la base de datos
+// Configuración de la conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,28 +13,30 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Consulta para obtener los departamentos
-$sql = "SELECT nombres, apellidos FROM usuarios";
+// Consulta para obtener los usuarios
+$sql = "SELECT id_usuario, nombres, apellidos FROM Usuario";
 $result = $conn->query($sql);
 
+// Verificar si se obtuvieron resultados
 if ($result->num_rows > 0) {
-    // Crear un array para almacenar los departamentos
+    // Crear un array para almacenar los usuarios
     $usuarios = array();
     
     // Iterar sobre los resultados y almacenarlos en el array
     while ($row = $result->fetch_assoc()) {
         $usuario = array(
-            "id_usuario" => $row["id_usuario"],
-            "nombre_usuario" => $row["nombres"],
-            "apellido_usuario" => $row["apellidos"],
+            "id" => $row["id_usuario"],
+            "nombre_completo" => $row["nombres"] . " " . $row["apellidos"]
         );
         array_push($usuarios, $usuario);
     }
     
-    // Devolver los departamentos como JSON
+    // Devolver los usuarios como JSON
     echo json_encode($usuarios);
 } else {
     echo json_encode(array());
 }
+
+// Cerrar la conexión
 $conn->close();
 ?>

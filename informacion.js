@@ -72,3 +72,21 @@ xhrUsuarios.onreadystatechange = function() {
     }
 };
 xhrUsuarios.send();
+
+// Evento de clic para el botón "Seleccionar"
+document.getElementById("seleccionarBtn").addEventListener("click", function() {
+    var usuarioSelect = document.getElementById("usuario");
+    var usuarioId = usuarioSelect.value;
+    var usuarioNombre = usuarioSelect.options[usuarioSelect.selectedIndex].text;
+
+    if (usuarioId) {
+        // Mostrar el div en la cabecera y actualizar el nombre del usuario
+        document.getElementById("userHeader").style.display = "block";
+        document.getElementById("selectedUserName").textContent = usuarioNombre;
+
+        // Redirigir a gestionar_cuenta.html con el ID del usuario seleccionado
+        window.location.href = "gestionar_cuenta.html?id_usuario=" + usuarioId;
+    } else {
+        alert("Por favor selecciona un usuario");
+    }
+});
