@@ -23,7 +23,7 @@ xhrDepartamentos.send();
 var municipioSelect = document.getElementById("municipio");
 
 // Manejar el evento onchange del select de departamentos
-departamentoSelect.addEventListener("change", function() {
+usuarioSelect.addEventListener("change", function() {
     // Limpiar las opciones de municipios
     municipioSelect.innerHTML = "<option value=''>Selecciona un municipio</option>";
 
@@ -49,3 +49,26 @@ departamentoSelect.addEventListener("change", function() {
     };
     xhrMunicipios.send();
 });
+
+
+
+var usuarioSelect = document.getElementById("departamento");
+
+// Realizar una solicitud AJAX para obtener la lista de departamentos desde el servidor
+var xhrUsuarios = new XMLHttpRequest();
+xhrUsuarios.open("GET", "get_usuarios.php", true);
+xhrUsuarios.onreadystatechange = function() {
+    if (xhrUsuarios.readyState === 4 && xhrUsuarios.status === 200) {
+        // Parsear la respuesta JSON
+        var usuarios = JSON.parse(xhrUsuarios.responseText);
+        
+        // Agregar opciones de departamentos al elemento select
+        usuarios.forEach(function(usuario) {
+            var option = document.createElement("option");
+            option.value = usuario.id;
+            option.text = usuario.nombre;
+            usuarioSelect.appendChild(option);
+        });
+    }
+};
+xhrUsuarios.send();
