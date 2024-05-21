@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $municipio = $_POST["municipio"];
     $password = $_POST["password"];
     $confirmar_password = $_POST["confirmar_password"];
-    $terminos = isset($_POST["terminos"]) ? "Aceptado" : "No aceptado";
+    $terminos = isset($_POST["tyc"]) ? "Aceptado" : "No aceptado";
 
     // Validar si las contraseñas coinciden
     if ($password !== $confirmar_password) {
@@ -19,7 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Validar otros campos si es necesario
+    // Conexión a la base de datos
+    $servername = "localhost";
+    $username = "root"; 
+    $password_db = ""; 
+    $dbname = "shoppingcart";
+
+    // Crear conexión
+    $conn = new mysqli($servername, $username, $password_db, $dbname);
+
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
 
     // Procesar la foto de perfil si se ha subido
     $foto_perfil = "";
@@ -44,10 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($nombre_temporal, $foto_perfil);
     }
 
-    // Guardar los datos en la base de datos
-    // Aquí deberías escribir el código para guardar los datos en la base de datos
+    // Encriptar la contraseña
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Mostrar mensaje de éxito
-    echo "¡Usuario registrado correctamente!";
+    // Insertar datos en la tabla usuarios
+    $sql = "INSERT INTO Usuario (nombres, apellidos, id_usuario, correo, telefono, direccion, password, foto_perfil, id_municipio, acepto_terminos) 
+            VALUES ('$nombres', '$apellidos', '$id_usuario', '$correo', '$telefono', '$direccion', '$hashed_password', '$foto_perfil', '$municipio', '$terminos')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "¡Usuario registrado correctamente!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Cerrar conexión
+    $conn->close();
 }
-
